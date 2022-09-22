@@ -1,0 +1,16 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = "mysql://doadmin:AVNS_U_DY_HScrn7edJ_m8I4@db-testes-do-user-12107343-0.b.db.ondigitalocean.com:25060/defaultdb?ssl-mode=REQUIRED"
+}
+
+model Students {
+    id       Int    @id @default(autoincrement())
+    email    String @unique
+    name     String
+    cpf      String @unique
+    register Int    @unique
+}

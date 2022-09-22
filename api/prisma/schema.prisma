@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
     provider = "mysql"
-    url      = "mysql://doadmin:AVNS_U_DY_HScrn7edJ_m8I4@db-testes-do-user-12107343-0.b.db.ondigitalocean.com:25060/defaultdb?ssl-mode=REQUIRED"
+    url      = env("DATABASE_URL")
 }
 
 model Students {

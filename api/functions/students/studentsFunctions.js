@@ -91,5 +91,27 @@ async function updateStudent(id,student){
       return(updateerror)
     }
   }
+  async function deleteStudent(id){
+    try {
+       await prisma.Students.delete({
+        where:{
+          id: parseInt(id)
+        }
+      })
+      return('Cadastro excluído com sucesso')
+    }  catch (e) {
+      let updateerror = 'Erro ao excluir, tente novamente'
+      if (e instanceof Prisma.PrismaClientKnownRequestError) {
+        console.log(
+          `There is a unique constraint violation, ${e.meta.cause}`
+        )
+        
+        if (e.code === 'P2025') {
+          updateerror = 'Usuário não encontrado'
+        }
+      }
+      return(updateerror)
+    }
+  }
 
-module.exports = {findStudents,updateStudent,createStudent}
+module.exports = {findStudents,updateStudent,createStudent,deleteStudent}

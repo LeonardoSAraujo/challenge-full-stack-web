@@ -41,7 +41,7 @@
           </v-icon>
           <v-icon
             small
-            @click="deleteItem(item)"
+            @click="deleteStudent(item)"
           >
             mdi-delete
           </v-icon>
@@ -54,7 +54,7 @@
         <div class="d-flex mt-5"><label class="label-edit">Nome</label><input class="input-edit" placeholder="Nome do Aluno" v-model="tempStudent.name" type="text"/></div>
         <div class="d-flex mt-5"><label class="label-edit">Email</label><input class="input-edit" placeholder="Email do aluno" v-model="tempStudent.email" type="text"/></div>
         <div class="d-flex mt-5"><label class="label-edit">RA</label><input :disabled="edit?true:false" class="input-edit" placeholder="Registro Acadêmico" v-model="tempStudent.register" type="text"/></div>
-        <div class="d-flex mt-5"><label class="label-edit">CPF</label><input :disabled="edit?true:false" class="input-edit" placeholder="CPF" v-model="tempStudent.cpf" type="text"/></div>
+        <div class="d-flex mt-5"><label class="label-edit">CPF</label><input v-mask="'###.###.###-##'" :disabled="edit?true:false" class="input-edit" placeholder="CPF" v-model="tempStudent.cpf" type="text"/></div>
         <br><br>
         <div class="d-flex justify-space-around"> <v-btn
             class="grey"
@@ -81,6 +81,7 @@
 </template>
 
 <script>
+  /* eslint-disable */
 import axios from 'axios';
 
   export default {
@@ -100,7 +101,6 @@ import axios from 'axios';
             class: 'white--text'
           },
           { text: 'Nome', value: 'name',class: 'white--text'},
-          { text: 'CPF', value: 'cpf',class: 'white--text' },
           { text: 'CPF', value: 'cpf',class: 'white--text' },
           { text: 'Actions', value: 'actions', sortable: false },
         ],
@@ -127,6 +127,14 @@ import axios from 'axios';
         this.tempStudent = {}
         document.getElementById("list").style.display = this.new?'none':'block';
         document.getElementById("edit").style.display = this.new?'block':'none';
+      },
+      deleteStudent: function(item){
+        if(confirm('Quer mesmo excluir este cadastro?') == true){
+          axios.delete(`http://localhost:3000/users?id=${item.id}`,this.headers).then(function(response){
+          alert(response.data.status)
+        })
+        }
+        this.searchstudents()
       },
       editStudent: function(item){
         this.edit = true

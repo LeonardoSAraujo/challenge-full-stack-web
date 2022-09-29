@@ -2,13 +2,14 @@ const { PrismaClient,Prisma } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 async function createStudent(student){
+  console.log(student)
     try {
        await prisma.Students.create({
         data:{
           name: student.name,
           email: student.email,
           cpf: student.cpf,
-          register: student.register
+          register: parseInt(student.register)
         },
       })
       return('Cadastro efetuado')

@@ -22,8 +22,9 @@ router.post('/', async function(req,res,next){
 /* POST edit a user */
 router.put('/', async function(req,res,next){
   const response = await updateStudent(req.query.id,req.body)
-  console.log(response)
-  res.send(response)
+  res.json({
+    status: response
+  })
 })
 
 module.exports = router;

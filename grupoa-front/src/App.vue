@@ -47,6 +47,13 @@
           </v-list>
     </v-navigation-drawer>
     <v-main>
+      <v-container fluid id="content">
+    <v-divider class="black"></v-divider>
+    <v-app-bar flat class="lightgrey d-flex justify-center" outlined >
+      <v-toolbar-title>Consulta de Alunos</v-toolbar-title>
+    </v-app-bar>
+    <v-divider class="black"></v-divider>
+  </v-container>
       <StudentsList/>
     </v-main>
   </v-app>
@@ -54,12 +61,14 @@
 
 <script>
 import StudentsList from './components/StudentsList';
+//import TestTable from './components/TestTable.vue';
 
 export default {
   name: 'App',
 
   components: {
     StudentsList,
+    //TestTable,
   },
 
   data: () => ({
@@ -69,3 +78,8 @@ export default {
   }),
 };
 </script>
+<style>
+    #content{
+    padding: inherit;
+  }
+</style>
